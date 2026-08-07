@@ -89,3 +89,70 @@ ${result[0].example}
 return "請換個說法";
 
 }
+function teacherReply(input){
+
+
+let text=input;
+
+
+if(
+text.includes("不懂")
+){
+
+return `
+
+不要急 😊
+
+土耳其語：
+
+Anlamadım.
+
+意思：
+
+我不懂。
+
+請跟著念：
+
+An-la-ma-dım
+
+`;
+
+}
+
+
+
+if(
+text.includes("你好")
+){
+
+return `
+
+你可以說：
+
+Merhaba
+
+更自然：
+
+Merhaba, nasılsınız?
+
+`;
+
+}
+
+
+
+return `
+
+很好，我們練習：
+
+請翻譯：
+
+"我要一杯咖啡"
+
+提示：
+
+Bir ____ lütfen.
+
+`;
+
+}
