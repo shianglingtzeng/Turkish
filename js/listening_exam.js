@@ -1,211 +1,219 @@
-const listeningDatabase=[
+let currentListening=0;
 
+let score=0;
 
-{
 
-id:1,
 
-level:"A1",
+function loadListeningQuestion(){
 
-audioText:
 
-"Benim adım Ahmet.",
+let q=
 
+listeningDatabase[currentListening];
 
-question:
 
-"說話者的名字是？",
 
+document
+.getElementById(
+"listeningBox"
+)
 
-translation:
+.innerHTML=
 
-"我的名字是 Ahmet。",
+`
 
+<h3>
+🎧 A1 Listening
+</h3>
 
-options:[
 
-"Ahmet",
+<button onclick="speakTurkish('${q.audioText}')">
 
-"Mehmet",
+🔊 播放語音
 
-"Ali"
+</button>
 
-],
 
 
-answer:
+<p>
 
-"Ahmet"
+問題：
 
-},
+${q.question}
 
+</p>
 
 
-{
+<div>
 
+${q.options.map(
 
-id:2,
+option=>
 
-level:"A1",
 
+`
 
-audioText:
+<button
 
-"Merhaba, nasılsınız?",
+onclick="checkListening('${option}')">
 
+${option}
 
-question:
+</button>
 
-"這句話的意思？",
 
+`
 
-translation:
+).join("")}
 
-"你好，您好嗎？",
+</div>
 
 
-options:[
+<p>
 
-"你好嗎？",
+第 ${currentListening+1}
 
-"再見",
+題 / ${listeningDatabase.length}
 
-"謝謝"
+</p>
 
-],
 
+`;
 
-answer:
 
-"你好嗎？"
-
-},
-
-
-
-{
-
-
-id:3,
-
-level:"A1",
-
-
-audioText:
-
-"Su istiyorum.",
-
-
-question:
-
-"他想要什麼？",
-
-
-translation:
-
-"我想要水。",
-
-
-options:[
-
-"水",
-
-"咖啡",
-
-"茶"
-
-],
-
-
-answer:
-
-"水"
-
-},
-
-
-
-{
-
-
-id:4,
-
-level:"A1",
-
-
-audioText:
-
-"İstanbul'da yaşıyorum.",
-
-
-question:
-
-"他住在哪裡？",
-
-
-translation:
-
-"我住在伊斯坦堡。",
-
-
-options:[
-
-"Ankara",
-
-"İstanbul",
-
-"İzmir"
-
-],
-
-
-answer:
-
-"İstanbul"
-
-},
-
-
-
-{
-
-
-id:5,
-
-level:"A1",
-
-
-audioText:
-
-"Kaç para?",
-
-
-question:
-
-"這句話是在問？",
-
-
-translation:
-
-"多少錢？",
-
-
-options:[
-
-"多少錢",
-
-"在哪裡",
-
-"幾歲"
-
-],
-
-
-answer:
-
-"多少錢"
 
 }
 
 
-];
+
+function checkListening(answer){
+
+
+let q=
+
+listeningDatabase[currentListening];
+
+
+
+if(answer===q.answer){
+
+
+score++;
+
+
+alert(
+"✅ 正確!"
+);
+
+
+}
+
+else{
+
+
+alert(
+
+"❌ 答案：
+
+"+q.answer
+
+);
+
+
+}
+
+
+
+currentListening++;
+
+
+
+if(
+
+currentListening
+
+<
+
+listeningDatabase.length
+
+){
+
+
+loadListeningQuestion();
+
+
+}
+
+else{
+
+
+showListeningResult();
+
+
+}
+
+
+}
+
+
+
+function showListeningResult(){
+
+
+document
+
+.getElementById(
+
+"listeningBox"
+
+)
+
+.innerHTML=
+
+`
+
+<h2>
+
+🎉 完成測驗
+
+</h2>
+
+
+<p>
+
+分數：
+
+${score}
+
+/
+
+${listeningDatabase.length}
+
+</p>
+
+
+<button onclick="restartListening()">
+
+重新開始
+
+</button>
+
+
+`;
+
+}
+
+
+
+function restartListening(){
+
+
+currentListening=0;
+
+score=0;
+
+
+loadListeningQuestion();
+
+
+}
