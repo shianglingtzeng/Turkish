@@ -1,55 +1,133 @@
-// ===================================
-// Turkish Survival System v2.0
-// Core Engine
-// ===================================
+/*
+=================================
+ Turkish Survival System v7.5
+
+ app.js
+ Main Controller
+
+=================================
+*/
 
 
-
-let learnedWords =
-JSON.parse(
-localStorage.getItem("learnedWords")
-)
-|| [];
-
-
-
-let currentWord="Su";
-
-
-
-
+// ===============================
 // 啟動
+// ===============================
 
-window.onload=function(){
+
+document.addEventListener(
+
+"DOMContentLoaded",
+
+function(){
+
+
+console.log(
+
+"🇹🇷 Turkish Survival System Started"
+
+);
+
+
+
+initializeApp();
+
+
+
+});
+
+
+
+
+
+// ===============================
+// 初始化
+// ===============================
+
+
+function initializeApp(){
+
+
+
+loadTodayMission();
+
+
+loadProgress();
+
 
 loadDays();
 
-showProgress();
 
-loadMission();
-
-};
+loadMyLife();
 
 
+showPage("home");
 
 
 
-// =======================
-// 30天課程
-// =======================
+}
 
 
-function loadDays(){
 
 
-let menu=
-document.getElementById("dayMenu");
 
 
-if(typeof turkishDatabase==="undefined"){
+// ===============================
+// 今日任務
+// ===============================
 
-menu.innerHTML=
-"等待資料庫";
+
+function loadTodayMission(){
+
+
+
+let box =
+
+document.getElementById(
+
+"dailyMission"
+
+);
+
+
+
+if(!box) return;
+
+
+
+let today =
+
+new Date().getDate();
+
+
+
+let day =
+
+(today % 30) || 1;
+
+
+
+let lesson =
+
+a1ThirtyDays.find(
+
+x => x.day === day
+
+);
+
+
+
+if(!lesson){
+
+
+box.innerHTML=
+
+`
+
+今天：
+
+複習土耳其文
+
+`;
 
 return;
 
@@ -57,41 +135,35 @@ return;
 
 
 
-let html="";
-
-
-turkishDatabase.forEach(day=>{
-
-
-html +=
+box.innerHTML=
 
 `
 
-<button
+<h3>
 
-class="dayButton"
+Day ${lesson.day}
 
-onclick="openDay(${day.day})"
+</h3>
 
->
 
-Day ${day.day}
+<h4>
 
-<br>
+${lesson.title}
 
-${day.category}
+</h4>
 
-</button>
+
+<p>
+
+任務：
+
+${lesson.task}
+
+</p>
 
 
 `;
 
-
-
-});
-
-
-menu.innerHTML=html;
 
 
 }
@@ -100,17 +172,163 @@ menu.innerHTML=html;
 
 
 
-// =======================
-// 打開課程
-// =======================
 
 
-function openDay(day){
+
+// ===============================
+// 打卡
+// ===============================
+
+
+function dailyCheckIn(){
+
+
+
+let today =
+
+new Date()
+
+.toLocaleDateString();
+
+
+
+localStorage.setItem(
+
+"lastCheck",
+
+today
+
+);
+
+
+
+alert(
+
+"🎉 今日學習完成！"
+
+);
+
+
+
+loadProgress();
+
+
+}
+
+
+
+
+
+
+
+
+// ===============================
+// 課程列表
+// ===============================
+
+
+function loadDays(){
+
+
+
+let menu=
+
+document.getElementById(
+
+"dayMenu"
+
+);
+
+
+
+if(!menu) return;
+
+
+
+menu.innerHTML="";
+
+
+
+a1ThirtyDays.forEach(
+
+lesson=>{
+
+
+let btn=
+
+document.createElement(
+
+"button"
+
+);
+
+
+
+btn.className=
+
+"day-button";
+
+
+
+btn.innerHTML=
+
+`
+
+Day ${lesson.day}
+
+<br>
+
+${lesson.title}
+
+`;
+
+
+
+btn.onclick=
+
+function(){
+
+
+openLesson(
+
+lesson.day
+
+);
+
+
+};
+
+
+
+menu.appendChild(btn);
+
+
+
+}
+
+);
+
+
+}
+
+
+
+
+
+
+
+// ===============================
+// 開啟課程
+// ===============================
+
+
+function openLesson(day){
+
 
 
 let lesson=
 
-turkishDatabase.find(
+a1ThirtyDays.find(
 
 x=>x.day===day
 
@@ -120,83 +338,128 @@ x=>x.day===day
 
 let area=
 
-document.getElementById("wordArea");
+document.getElementById(
+
+"lessonArea"
+
+);
 
 
 
-let html="";
+if(!lesson)return;
 
 
 
-lesson.words.forEach(word=>{
-
-
-html +=
+area.innerHTML=
 
 `
 
-<div class="wordCard">
+<h2>
+
+Day ${lesson.day}
+
+</h2>
 
 
-<div class="word">
+<h3>
 
-${word.turkish}
+${lesson.title}
 
-</div>
-
-
-<div class="pronunciation">
-
-🔊 ${word.pronunciation}
-
-</div>
+</h3>
 
 
-<div class="chinese">
+<h4>
 
-${word.chinese}
+單字：
 
-</div>
+</h4>
 
+
+${
+
+lesson.words ?
+
+lesson.words.map(
+
+x=>`
+
+<p>
+
+🇹🇷 ${x}
+
+</p>
+
+`
+
+).join("")
+
+:
+
+""
+
+}
+
+
+
+<h4>
+
+今日任務：
+
+</h4>
 
 
 <p>
 
-${word.example}
-
-<br>
-
-${word.exampleChinese}
+${lesson.task}
 
 </p>
 
-
-
-<button onclick="speak('${word.turkish}')">
-
-🔊 發音
-
-</button>
-
-
-<button onclick="learn('${word.turkish}')">
-
-✅ 完成
-
-</button>
-
-
-</div>
 
 
 `;
 
 
 
-});
+}
 
 
-area.innerHTML=html;
+
+
+
+
+
+
+
+// ===============================
+// 字典搜尋快捷
+// ===============================
+
+
+function quickSearch(word){
+
+
+
+let input=
+
+document.getElementById(
+
+"searchInput"
+
+);
+
+
+
+if(input){
+
+
+input.value=word;
+
+
+searchWord();
+
+
+}
+
 
 
 }
@@ -204,213 +467,83 @@ area.innerHTML=html;
 
 
 
-// =======================
-// 搜尋
-// =======================
-
-
-function searchWord(){
-
-
-let keyword=
-
-document
-.getElementById("searchInput")
-.value
-.toLowerCase();
 
 
 
-let result=[];
+
+// ===============================
+// AI老師入口
+// ===============================
+
+
+function askTeacher(){
 
 
 
-turkishDatabase.forEach(day=>{
+let input=
 
+document.getElementById(
 
-day.words.forEach(word=>{
+"aiInput"
 
-
-if(
-
-word.turkish
-.toLowerCase()
-.includes(keyword)
-
-||
-
-word.chinese
-.includes(keyword)
-
-){
-
-
-result.push(word);
-
-
-}
-
-
-});
-
-
-});
+);
 
 
 
-let area=
+let answer=
 
-document.getElementById("searchResult");
+document.getElementById(
+
+"aiAnswer"
+
+);
 
 
 
-if(result.length===0){
-
-area.innerHTML=
-"找不到";
+if(!input || !answer)
 
 return;
 
+
+
+let question=
+
+input.value;
+
+
+
+if(question==="")
+
+return;
+
+
+
+if(typeof teacherReply==="function"){
+
+
+answer.innerHTML=
+
+teacherReply(question);
+
+
 }
 
+else{
 
 
-area.innerHTML=
-
-result.map(word=>
-
+answer.innerHTML=
 
 `
 
-<p>
+🇹🇷
 
-<b>${word.turkish}</b>
+請輸入：
 
-<br>
+我要買水
 
-${word.chinese}
+多少錢
 
-<br>
-
-🔊 ${word.pronunciation}
-
-</p>
-
-<button onclick="speak('${word.turkish}')">
-
-播放
-
-</button>
-
-`
-
-).join("");
-
-
-
-}
-
-
-
-
-
-// =======================
-// 發音
-// =======================
-
-
-function speak(text){
-
-
-let speech=
-
-new SpeechSynthesisUtterance(text);
-
-
-
-speech.lang="tr-TR";
-
-speech.rate=0.75;
-
-
-
-speechSynthesis.speak(speech);
-
-
-}
-
-
-
-
-function speakTest(){
-
-speak(currentWord);
-
-}
-
-
-
-
-
-// =======================
-// 學習紀錄
-// =======================
-
-
-function learn(word){
-
-
-if(!learnedWords.includes(word)){
-
-
-learnedWords.push(word);
-
-
-localStorage.setItem(
-
-"learnedWords",
-
-JSON.stringify(learnedWords)
-
-);
-
-
-}
-
-
-showProgress();
-
-
-}
-
-
-
-
-
-function showProgress(){
-
-
-let area=
-
-document.getElementById("progressArea");
-
-
-
-area.innerHTML=
-
-`
-
-已學習：
-
-<b>${learnedWords.length}</b>
-
-個單字
-
-<br><br>
-
-目標：
-
-3000個生活單字
+怎麼走
 
 `;
 
@@ -418,50 +551,102 @@ area.innerHTML=
 
 
 
-
-// =======================
-// 今日任務
-// =======================
-
-
-function loadMission(){
-
-
-document
-.getElementById("dailyMission")
-.innerHTML=
-
-`
-
-今天任務：
-
-<br>
-
-🛒 完成超市單字
-
-<br>
-
-🔊 聽10次發音
-
-<br>
-
-⭐ 收藏5個單字
-
-`;
-
 }
-if(
-
-"serviceWorker" in navigator
-
-){
 
 
-navigator.serviceWorker.register(
 
-"service-worker.js"
+
+
+
+
+
+// ===============================
+// 商品辨識
+// ===============================
+
+
+function scanTurkish(){
+
+
+
+let text=
+
+document.getElementById(
+
+"cameraText"
+
+).value;
+
+
+
+let result=
+
+document.getElementById(
+
+"scanResult"
 
 );
+
+
+
+if(typeof scanProduct==="function"){
+
+
+result.innerHTML=
+
+scanProduct(text);
+
+
+}
+
+else{
+
+
+result.innerHTML=
+
+"資料庫尚未建立";
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// ===============================
+// 系統資訊
+// ===============================
+
+
+function systemInfo(){
+
+
+
+return {
+
+
+version:"7.5",
+
+
+language:"Turkish",
+
+
+location:"Istanbul",
+
+
+course:"A1 Survival"
+
+
+
+};
+
 
 
 }
