@@ -57,11 +57,11 @@ loadProgress();
 loadDays();
 
 
-loadMyLife();
-
+if(typeof showPage==="function"){
 
 showPage("home");
 
+}
 
 
 }
