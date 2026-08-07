@@ -1,86 +1,27 @@
-let userProgress = JSON.parse(
-
-localStorage.getItem(
-"userProgress"
-)
-
-)
-||
-{
-
-days:0,
-
-words:0,
-
-streak:0,
-
-lastDate:""
-
-};
-
-
-
-function saveProgress(){
-
-localStorage.setItem(
-
-"userProgress",
-
-JSON.stringify(userProgress)
-
-);
-
-}
-
-
-
-function dailyCheckIn(){
-
-
-let today =
-new Date()
-.toISOString()
-.substring(0,10);
-
-
-
-if(userProgress.lastDate!==today){
-
-
-userProgress.days++;
-
-userProgress.streak++;
-
-userProgress.lastDate=today;
-
-
-saveProgress();
-
-
-alert(
-"🎉 今日學習完成！"
-);
-
-
-}
-
-
-showDashboard();
-
-
-}
-
-
-
-
-function showDashboard(){
+function loadProgress(){
 
 
 let box=
 
 document.getElementById(
+
 "dashboard"
+
 );
+
+
+
+if(!box)return;
+
+
+
+let count=
+
+localStorage.getItem(
+
+"studyDays"
+
+)||0;
 
 
 
@@ -88,37 +29,58 @@ box.innerHTML=
 
 `
 
-📅 完成天數：
+📚 已完成：
 
-${userProgress.days}
-
-<br><br>
-
-🔥 連續學習：
-
-${userProgress.streak}
+${count}
 
 天
 
+
 <br><br>
 
-📚 已學單字：
 
-${learnedWords.length}
+🎯 目標：
 
-個
-
+30天A1生存
 
 `;
+
+
 
 }
 
 
 
-window.addEventListener(
+function addProgress(){
 
-"load",
 
-showDashboard
+let count=
+
+Number(
+
+localStorage.getItem(
+
+"studyDays"
+
+)||0
 
 );
+
+
+
+count++;
+
+
+localStorage.setItem(
+
+"studyDays",
+
+count
+
+);
+
+
+loadProgress();
+
+
+}
