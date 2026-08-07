@@ -1,7 +1,7 @@
 function showPage(page){
 
 
-let pages=[
+const pages=[
 
 "homePage",
 
@@ -21,9 +21,16 @@ pages.forEach(
 
 p=>{
 
-document.getElementById(p)
 
-.style.display="none";
+let el=
+
+document.getElementById(p);
+
+
+
+if(el)
+
+el.style.display="none";
 
 
 }
@@ -32,13 +39,19 @@ document.getElementById(p)
 
 
 
+let target=
+
 document.getElementById(
 
 page+"Page"
 
-)
+);
 
-.style.display="block";
+
+
+if(target)
+
+target.style.display="block";
 
 
 
