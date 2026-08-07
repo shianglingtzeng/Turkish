@@ -1,31 +1,131 @@
-Ben
-我
+function searchGrammar(){
 
-Sen
-你
 
-O
-他/她/它
+let input=
 
-Biz
-我們
+document
 
-Siz
-你們/您
+.getElementById(
+"grammarInput"
+)
 
-Onlar
-他們
+.value;
 
-Ben öğrenciyim.
 
-我是學生。
 
-Ben öğrenci değilim.
+let result=
 
-我不是學生。
+document
 
-動詞 + yor
+.getElementById(
+"grammarResult"
+);
 
-gidiyorum
 
-我正在去
+
+let grammar=
+
+grammarDatabase.find(
+
+x =>
+
+x.title.includes(input)
+
+||
+
+x.turkish
+
+.toLowerCase()
+
+.includes(
+
+input.toLowerCase()
+
+)
+
+);
+
+
+
+if(grammar){
+
+
+result.innerHTML=
+
+`
+
+<div class="grammarCard">
+
+
+<h3>
+
+📚 ${grammar.title}
+
+</h3>
+
+
+<h4>
+
+🇹🇷 ${grammar.turkish}
+
+</h4>
+
+
+<p>
+
+規則：
+
+<br>
+
+${grammar.rule}
+
+</p>
+
+
+<hr>
+
+
+例句：
+
+
+<ul>
+
+${
+
+grammar.examples
+
+.map(
+
+e=>`<li>${e}</li>`
+
+)
+
+.join("")
+
+}
+
+</ul>
+
+
+
+</div>
+
+
+`;
+
+
+
+}
+
+else{
+
+
+result.innerHTML=
+
+"找不到此文法";
+
+
+}
+
+
+}
