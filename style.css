@@ -1,50 +1,589 @@
+/* =================================
+ Turkish Survival System v6.0
+ Mobile App UI
+================================= */
+
+
+
+*{
+
+box-sizing:border-box;
+
+}
+
+
+
 body{
+
 
 margin:0;
 
 font-family:
 
-Arial,
 "Noto Sans TC",
+"Arial",
 sans-serif;
 
-background:#f2f3f5;
+
+background:#f5f6fa;
+
 
 color:#333;
 
+
+line-height:1.6;
+
+
 }
 
 
+
+
+
+/* HEADER */
 
 header{
 
-background:#c8102e;
+
+background:
+
+linear-gradient(
+
+135deg,
+
+#c8102e,
+
+#e63946
+
+);
+
 
 color:white;
 
+
+padding:
+
+35px 20px;
+
+
 text-align:center;
 
-padding:25px;
+
+border-radius:
+
+0 0 30px 30px;
+
+
+box-shadow:
+
+0 5px 20px rgba(0,0,0,0.15);
+
 
 }
 
 
 
-h1{
+header h1{
 
-margin:0;
+
+font-size:32px;
+
+
+margin:
+
+0 0 10px;
+
 
 }
 
+
+header p{
+
+
+margin:5px;
+
+
+font-size:15px;
+
+
+opacity:0.9;
+
+
+}
+
+
+
+
+
+/* MAIN */
 
 
 main{
 
-max-width:600px;
 
-margin:auto;
+max-width:
 
-padding:15px;
+600px;
+
+
+margin:
+
+auto;
+
+
+padding:
+
+15px;
+
+
+}
+
+
+
+
+
+/* CARD */
+
+.card{
+
+
+background:white;
+
+
+border-radius:
+
+22px;
+
+
+padding:
+
+20px;
+
+
+margin-bottom:
+
+18px;
+
+
+box-shadow:
+
+0 5px 15px
+
+rgba(0,0,0,0.08);
+
+
+transition:
+
+0.3s;
+
+
+}
+
+
+
+.card:hover{
+
+
+transform:
+
+translateY(-3px);
+
+
+}
+
+
+
+
+
+.card h2{
+
+
+margin-top:0;
+
+
+color:#c8102e;
+
+
+font-size:22px;
+
+
+}
+
+
+
+
+
+/* INPUT */
+
+
+input,
+textarea{
+
+
+width:100%;
+
+
+padding:
+
+15px;
+
+
+border-radius:
+
+15px;
+
+
+border:
+
+1px solid #ddd;
+
+
+font-size:16px;
+
+
+margin:
+
+10px 0;
+
+
+resize:none;
+
+
+}
+
+
+
+
+input:focus,
+textarea:focus{
+
+
+outline:none;
+
+
+border:
+
+2px solid #c8102e;
+
+
+}
+
+
+
+
+
+/* BUTTON */
+
+
+button{
+
+
+background:#c8102e;
+
+
+color:white;
+
+
+border:none;
+
+
+padding:
+
+14px 20px;
+
+
+border-radius:
+
+15px;
+
+
+font-size:16px;
+
+
+cursor:pointer;
+
+
+margin:
+
+5px;
+
+
+width:auto;
+
+
+transition:
+
+0.2s;
+
+
+}
+
+
+
+button:hover{
+
+
+background:#9d0b24;
+
+
+transform:
+
+scale(1.03);
+
+
+}
+
+
+
+
+
+/* SEARCH RESULT */
+
+
+#searchResult,
+#scanResult,
+#aiAnswer,
+#chatBox,
+#lessonArea,
+#dashboard,
+#testArea,
+#istanbulResult{
+
+
+background:
+
+#fafafa;
+
+
+border-radius:
+
+15px;
+
+
+padding:
+
+15px;
+
+
+margin-top:
+
+15px;
+
+
+border-left:
+
+5px solid #c8102e;
+
+
+}
+
+
+
+
+
+/* LANGUAGE WORD CARD */
+
+
+.wordCard{
+
+
+background:white;
+
+
+padding:
+
+15px;
+
+
+border-radius:
+
+15px;
+
+
+}
+
+
+
+
+
+.wordCard h2{
+
+
+color:#c8102e;
+
+
+}
+
+
+
+
+
+/* CHAT */
+
+
+#chatBox{
+
+
+min-height:
+
+120px;
+
+
+font-size:
+
+16px;
+
+
+}
+
+
+
+
+
+/* ROLE BUTTON */
+
+
+button:nth-child(n){
+
+
+min-height:
+
+45px;
+
+
+}
+
+
+
+
+
+/* COURSE DAY BUTTON */
+
+
+.day-button{
+
+
+background:white;
+
+
+color:#c8102e;
+
+
+border:
+
+2px solid #c8102e;
+
+
+width:
+
+100%;
+
+
+margin:
+
+5px 0;
+
+
+}
+
+
+
+.day-button:hover{
+
+
+background:#c8102e;
+
+
+color:white;
+
+
+}
+
+
+
+
+
+/* PROGRESS */
+
+
+.progress{
+
+
+height:
+
+20px;
+
+
+background:#eee;
+
+
+border-radius:
+
+20px;
+
+
+overflow:hidden;
+
+
+}
+
+
+
+
+
+.progress-bar{
+
+
+height:100%;
+
+
+background:#c8102e;
+
+
+}
+
+
+
+
+
+/* FOOTER */
+
+
+footer{
+
+
+text-align:center;
+
+
+padding:
+
+30px;
+
+
+color:#777;
+
+
+font-size:14px;
+
+
+}
+
+
+
+
+
+/* MOBILE OPTIMIZATION */
+
+
+@media(max-width:600px){
+
+
+
+header h1{
+
+
+font-size:26px;
+
 
 }
 
@@ -52,16 +591,16 @@ padding:15px;
 
 .card{
 
-background:white;
 
-border-radius:18px;
+padding:
 
-padding:20px;
+18px;
 
-margin-bottom:15px;
 
-box-shadow:
-0 4px 12px rgba(0,0,0,.08);
+border-radius:
+
+18px;
+
 
 }
 
@@ -69,106 +608,49 @@ box-shadow:
 
 button{
 
-background:#c8102e;
+
+width:
+
+100%;
+
+
+margin:
+
+6px 0;
+
+
+}
+
+
+
+}
+
+
+
+
+
+/* DARK MODE READY */
+
+.dark{
+
+
+background:#121212;
+
 
 color:white;
 
-border:0;
-
-padding:12px 18px;
-
-border-radius:10px;
-
-margin-top:10px;
-
-cursor:pointer;
 
 }
 
 
+.dark .card{
 
-input{
 
-width:100%;
+background:#1e1e1e;
 
-padding:14px;
 
-border-radius:10px;
+color:white;
 
-border:1px solid #ccc;
-
-font-size:16px;
 
 }
 
-
-
-.dayButton{
-
-display:block;
-
-width:100%;
-
-text-align:left;
-
-margin:6px 0;
-
-background:#222;
-
-}
-
-
-
-.wordCard{
-
-border-left:
-
-5px solid #c8102e;
-
-padding-left:15px;
-
-margin-bottom:20px;
-
-}
-
-
-
-.word{
-
-font-size:32px;
-
-font-weight:bold;
-
-color:#c8102e;
-
-}
-
-
-
-.chinese{
-
-font-size:20px;
-
-}
-
-
-
-.pronunciation{
-
-color:#666;
-
-}
-
-
-
-footer{
-
-text-align:center;
-
-padding:20px;
-
-color:#777;
-
-font-size:13px;
-
-}
