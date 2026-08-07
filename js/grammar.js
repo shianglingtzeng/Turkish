@@ -1,3 +1,85 @@
+const grammarRules=[
+
+
+{
+
+title:"現在式",
+
+rule:"動詞 + yor",
+
+example:
+
+"Geliyorum",
+
+meaning:
+
+"我正在來"
+
+
+},
+
+
+
+{
+
+title:"地點 -de/-da",
+
+rule:"在哪裡",
+
+example:
+
+"İstanbul'da",
+
+meaning:
+
+"在伊斯坦堡"
+
+
+},
+
+
+
+{
+
+title:"方向 -e/-a",
+
+rule:"去某地",
+
+example:
+
+"Metroya",
+
+meaning:
+
+"去地鐵"
+
+
+},
+
+
+
+{
+
+title:"所有格",
+
+rule:"我的/你的",
+
+example:
+
+"Benim evim",
+
+meaning:
+
+"我的家"
+
+
+}
+
+
+
+];
+
+
 const verbs=[
 
 
