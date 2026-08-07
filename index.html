@@ -1,11 +1,15 @@
 <!DOCTYPE html>
+
 <html lang="zh-TW">
 
 <head>
-<link rel="manifest" href="manifest.json">
+
+
 <meta charset="UTF-8">
 
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 
 <title>
 Turkish Survival System 🇹🇷
@@ -14,7 +18,12 @@ Turkish Survival System 🇹🇷
 
 <link rel="stylesheet" href="style.css">
 
+
+<link rel="manifest" href="pwa/manifest.json">
+
+
 </head>
+
 
 
 <body>
@@ -23,77 +32,100 @@ Turkish Survival System 🇹🇷
 <header>
 
 <h1>
-🇹🇷 Turkish Survival System
+🇹🇷 Turkish Survival
 </h1>
 
 <p>
-伊斯坦堡生活土耳其語助手
+Istanbul Life Assistant
 </p>
 
 </header>
 
 
 
+
 <main>
+
 
 
 <section class="card">
 
 <h2>
-📊 我的學習進度
+📅 今日任務
 </h2>
 
 
-<div id="dashboard">
-
-</div>
+<div id="dailyMission"></div>
 
 
 <button onclick="dailyCheckIn()">
 
-今日打卡
+完成今日打卡
 
 </button>
 
 
 </section>
+
+
+
+
+
 <section class="card">
 
-<button onclick="startReview()">
 
-開始複習
-
-</button>
-
-  
 <h2>
-📷 看懂土耳其商品
+📚 30天生存課程
 </h2>
 
 
-<p>
-拍照或輸入看到的土文
-</p>
+<div id="dayMenu">
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+<section class="card">
+
+
+<h2>
+🔎 快速搜尋
+
+</h2>
 
 
 <input
-id="cameraText"
-placeholder="例如 Son Kullanma Tarihi"
+
+id="searchInput"
+
+placeholder="中文 / 土耳其文"
+
+
 >
 
 
-<button onclick="scanTurkish()">
+<button onclick="searchWord()">
 
-辨識
+搜尋
 
 </button>
 
 
-<div id="scanResult">
+<div id="searchResult">
 
 </div>
 
+
 </section>
+
+
+
 
 
 
@@ -101,18 +133,28 @@ placeholder="例如 Son Kullanma Tarihi"
 <section class="card">
 
 <h2>
-🗺 Istanbul生活模式
+🤖 AI土耳其老師
 </h2>
 
 
-<button onclick="showIstanbul()">
+<input
 
-開啟我的生活圈
+id="aiInput"
+
+placeholder="例如：我想買水"
+
+
+>
+
+
+<button onclick="askTeacher()">
+
+詢問
 
 </button>
 
 
-<div id="istanbulResult">
+<div id="aiAnswer">
 
 </div>
 
@@ -123,7 +165,11 @@ placeholder="例如 Son Kullanma Tarihi"
 
 
 
+
+
+
 <section class="card">
+
 
 <h2>
 🗣 情境對話
@@ -148,159 +194,14 @@ placeholder="例如 Son Kullanma Tarihi"
 
 
 
-<section class="card">
-
-
-<h2>
-📅 30天生存課程
-</h2>
-
-
-<div id="dayMenu">
-
-載入課程...
-
-</div>
-
-
-</section>
-
-
-
 
 
 <section class="card">
 
 
 <h2>
-🔎 搜尋土耳其語
+📝 A1測驗
 
-</h2>
-
-
-<input
-
-id="searchInput"
-
-placeholder="輸入中文或土耳其文"
-
->
-
-
-<button onclick="searchWord()">
-
-搜尋
-
-</button>
-
-
-
-<div id="searchResult">
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-<section class="card">
-
-
-<h2>
-📖 今日單字
-</h2>
-
-
-<div id="wordArea">
-
-請選擇課程
-
-</div>
-
-
-
-</section>
-
-
-
-
-
-
-<section class="card">
-
-
-<h2>
-⭐ 我的學習
-
-</h2>
-
-
-<div id="progressArea">
-
-</div>
-
-
-</section>
-
-
-
-
-
-<section class="card">
-
-
-<h2>
-🗣 語音測試
-
-</h2>
-
-
-<button onclick="speakTest()">
-
-播放今日土耳其語
-
-</button>
-
-
-</section>
-  <section class="card">
-
-<h2>
-🤖 AI 土耳其老師
-</h2>
-
-
-<input
-
-id="aiInput"
-
-placeholder="輸入中文，例如：水"
-
->
-
-
-<button onclick="askTeacher()">
-
-詢問
-
-</button>
-
-
-<div id="aiAnswer">
-
-</div>
-
-
-</section>
-
-<section class="card">
-
-<h2>
-🇹🇷 A1測驗模式
 </h2>
 
 
@@ -318,13 +219,38 @@ placeholder="輸入中文，例如：水"
 
 </section>
 
+
+
+
+
+
+<section class="card">
+
+
+<h2>
+⭐ 我的進度
+
+</h2>
+
+
+<div id="dashboard">
+
+</div>
+
+
+</section>
+
+
+
 </main>
+
+
 
 
 
 <footer>
 
-Turkish Survival System v2.0
+Turkish Survival System v3.0
 
 <br>
 
@@ -334,19 +260,38 @@ Made for Istanbul Life 🇹🇷
 
 
 
-<script src="turkish_database.js"></script>
 
-<script src="app.js"></script>
 
-<script src="istanbul_database.js"></script>
 
-<script src="camera.js"></script>
+<script src="js/turkish_database.js"></script>
 
-<script src="istanbul_mode.js"></script>
+<script src="js/dialogue_database.js"></script>
 
-<script src="dialogue_database.js"></script>
+<script src="js/istanbul_database.js"></script>
 
-<script src="dialogue.js"></script>
+<script src="js/product_database.js"></script>
+
+
+
+<script src="js/app.js"></script>
+
+<script src="js/progress.js"></script>
+
+<script src="js/review.js"></script>
+
+<script src="js/speaking.js"></script>
+
+<script src="js/dialogue.js"></script>
+
+<script src="js/a1_test.js"></script>
+
+<script src="js/camera.js"></script>
+
+<script src="js/ai_teacher.js"></script>
+
+<script src="js/istanbul_life.js"></script>
+
+
 </body>
 
 </html>
