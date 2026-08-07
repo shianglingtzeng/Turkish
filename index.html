@@ -1,18 +1,15 @@
 <!DOCTYPE html>
-
 <html lang="zh-TW">
 
 <head>
 
-
 <meta charset="UTF-8">
-
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
 <title>
-Turkish Survival System 🇹🇷
+🇹🇷 Turkish Survival System
 </title>
 
 
@@ -22,8 +19,10 @@ Turkish Survival System 🇹🇷
 <link rel="manifest" href="pwa/manifest.json">
 
 
-</head>
+<meta name="theme-color" content="#c8102e">
 
+
+</head>
 
 
 <body>
@@ -32,15 +31,20 @@ Turkish Survival System 🇹🇷
 <header>
 
 <h1>
-🇹🇷 Turkish Survival
+🇹🇷 Turkish Survival System
 </h1>
 
 <p>
 Istanbul Life Assistant
 </p>
 
-</header>
 
+<p>
+30 Days A1 Survival Course
+</p>
+
+
+</header>
 
 
 
@@ -48,19 +52,26 @@ Istanbul Life Assistant
 
 
 
+<!-- 今日任務 -->
+
 <section class="card">
+
 
 <h2>
 📅 今日任務
 </h2>
 
 
-<div id="dailyMission"></div>
+<div id="dailyMission">
+
+載入今日任務...
+
+</div>
 
 
 <button onclick="dailyCheckIn()">
 
-完成今日打卡
+✅ 完成今日學習
 
 </button>
 
@@ -71,15 +82,17 @@ Istanbul Life Assistant
 
 
 
+<!-- 學習進度 -->
+
 <section class="card">
 
 
 <h2>
-📚 30天生存課程
+⭐ 我的學習進度
 </h2>
 
 
-<div id="dayMenu">
+<div id="dashboard">
 
 </div>
 
@@ -91,21 +104,65 @@ Istanbul Life Assistant
 
 
 
+
+<!-- 30天課程 -->
+
 <section class="card">
 
 
 <h2>
-🔎 快速搜尋
-
+📚 Day 1 - Day 30 A1課程
 </h2>
+
+
+<div id="dayMenu">
+
+
+<button onclick="loadDays()">
+
+開啟課程
+
+</button>
+
+
+</div>
+
+
+
+<div id="lessonArea">
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+<!-- 搜尋 -->
+
+<section class="card">
+
+
+<h2>
+🔎 土耳其生活搜尋
+</h2>
+
 
 
 <input
 
 id="searchInput"
 
-placeholder="中文 / 土耳其文"
-
+placeholder="
+輸入中文或土耳其文，例如：
+牛奶 / Süt / 價格
+"
 
 >
 
@@ -117,9 +174,12 @@ placeholder="中文 / 土耳其文"
 </button>
 
 
+
 <div id="searchResult">
 
+
 </div>
+
 
 
 </section>
@@ -130,33 +190,191 @@ placeholder="中文 / 土耳其文"
 
 
 
+<!-- AI老師 -->
+
+
 <section class="card">
+
 
 <h2>
 🤖 AI土耳其老師
 </h2>
 
 
-<input
+<textarea
 
 id="aiInput"
 
-placeholder="例如：我想買水"
+placeholder="
+
+例如：
+
+我要買水
+
+這多少錢？
+
+怎麼去地鐵？
+
+"
+
+></textarea>
+
+
+
+<button onclick="askTeacher()">
+
+詢問老師
+
+</button>
+
+
+
+<div id="aiAnswer">
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+<!-- 相機商品 -->
+
+<section class="card">
+
+
+<h2>
+📷 超市商品助手
+</h2>
+
+
+
+<input
+
+id="cameraText"
+
+placeholder="
+
+輸入包裝上的土文
+
+例如：
+
+Son Kullanma Tarihi
+
+"
+
+>
+
+
+
+<button onclick="scanTurkish()">
+
+辨識
+
+</button>
+
+
+
+<div id="scanResult">
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+<!-- AI角色 -->
+
+<section class="card">
+
+
+<h2>
+🗣 AI角色情境練習
+</h2>
+
+
+
+<div>
+
+
+<button onclick="selectRole('超市店員')">
+
+🛒 超市
+
+</button>
+
+
+<button onclick="selectRole('咖啡店員')">
+
+☕
+
+</button>
+
+
+<button onclick="selectRole('房東')">
+
+🏠
+
+</button>
+
+
+<button onclick="selectRole('Metro工作人員')">
+
+🚇
+
+</button>
+
+
+</div>
+
+
+
+
+
+<div id="chatBox">
+
+請選擇角色開始練習
+
+</div>
+
+
+
+
+
+<input
+
+id="userMessage"
+
+placeholder="
+輸入你的回答
+
+"
+
 
 
 >
 
 
-<button onclick="askTeacher()">
+<button onclick="sendMessage()">
 
-詢問
+送出
 
 </button>
 
 
-<div id="aiAnswer">
-
-</div>
 
 
 </section>
@@ -168,23 +386,28 @@ placeholder="例如：我想買水"
 
 
 
+
+<!-- 發音 -->
+
+
 <section class="card">
 
 
 <h2>
-🗣 情境對話
-
+🔊 發音練習
 </h2>
 
 
-<div id="dialogueArea">
+<div id="speechPractice">
+
 
 </div>
 
 
-<button onclick="nextDialogue()">
 
-下一句
+<button onclick="practiceSpeaking('Merhaba')">
+
+練習 Merhaba
 
 </button>
 
@@ -196,18 +419,25 @@ placeholder="例如：我想買水"
 
 
 
+
+
+
+<!-- A1測驗 -->
+
+
 <section class="card">
 
 
 <h2>
-📝 A1測驗
-
+📝 A1模擬測驗
 </h2>
+
 
 
 <div id="testArea">
 
 </div>
+
 
 
 <button onclick="startA1Test()">
@@ -217,63 +447,47 @@ placeholder="例如：我想買水"
 </button>
 
 
+
 </section>
 
 
 
 
 
+
+
+<!-- Istanbul -->
 
 <section class="card">
 
 
 <h2>
-⭐ 我的進度
-
+📍 Istanbul生活模式
 </h2>
 
 
-<div id="dashboard">
 
-</div>
+<button onclick="showIstanbul()">
 
-
-</section>
-
-<section class="card">
-
-<h2>
-🤖 Istanbul AI 助手
-</h2>
-
-
-<textarea
-
-id="lifeQuestion"
-
-placeholder="
-例如：
-這個多少錢？
-我要買牛奶
-怎麼去地鐵？
-">
-
-</textarea>
-
-
-<button onclick="askLifeAI()">
-
-詢問
+開啟我的生活圈
 
 </button>
 
 
-<div id="lifeAnswer">
+
+<div id="istanbulResult">
 
 </div>
 
 
+
 </section>
+
+
+
+
+
+
 
 </main>
 
@@ -281,13 +495,25 @@ placeholder="
 
 
 
+
+
+
 <footer>
 
-Turkish Survival System v3.0
 
-<br>
+<p>
+
+Turkish Survival System v6.0
+
+</p>
+
+
+<p>
 
 Made for Istanbul Life 🇹🇷
+
+</p>
+
 
 </footer>
 
@@ -296,35 +522,109 @@ Made for Istanbul Life 🇹🇷
 
 
 
+
+
+
+<!-- DATABASE -->
+
 <script src="js/turkish_database.js"></script>
 
-<script src="js/dialogue_database.js"></script>
 
 <script src="js/istanbul_database.js"></script>
+
 
 <script src="js/product_database.js"></script>
 
 
+<script src="js/dialogue_database.js"></script>
+
+
+<script src="js/a1_course.js"></script>
+
+
+<script src="js/a1_30days.js"></script>
+
+
+<script src="js/ai_roleplay.js"></script>
+
+
+
+
+
+
+
+<!-- FUNCTION -->
+
 
 <script src="js/app.js"></script>
 
+
 <script src="js/progress.js"></script>
+
 
 <script src="js/review.js"></script>
 
-<script src="js/speaking.js"></script>
 
-<script src="js/dialogue.js"></script>
+<script src="js/search.js"></script>
 
-<script src="js/a1_test.js"></script>
 
 <script src="js/camera.js"></script>
 
+
 <script src="js/ai_teacher.js"></script>
+
+
+<script src="js/life_ai.js"></script>
+
+
+<script src="js/dialogue.js"></script>
+
+
+<script src="js/conversation_engine.js"></script>
+
+
+<script src="js/speaking.js"></script>
+
+
+<script src="js/pronunciation_teacher.js"></script>
+
+
+<script src="js/a1_test.js"></script>
+
 
 <script src="js/istanbul_life.js"></script>
 
 
+
+
+<script>
+
+
+// PWA啟動
+
+
+if(
+"serviceWorker" in navigator
+){
+
+
+navigator.serviceWorker.register(
+
+"pwa/service-worker.js"
+
+);
+
+
+}
+
+
+
+</script>
+
+
+
+
 </body>
+
 
 </html>
