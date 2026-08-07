@@ -1,111 +1,74 @@
-function practiceSpeaking(word){
+const pronunciationWords=[
 
 
-let box=
+{
 
-document
-.getElementById(
-"speechPractice"
-);
+tr:"Merhaba",
 
+zh:"你好",
 
+sound:"梅哈巴",
 
-box.innerHTML=
+level:"A1"
 
-`
-
-<h3>
-
-請朗讀：
-
-${word}
-
-</h3>
-
-
-<button onclick="recordSpeech('${word}')">
-
-🎙開始
-
-</button>
-
-`;
-
-}
+},
 
 
 
+{
 
+tr:"Teşekkür ederim",
 
-function recordSpeech(target){
+zh:"謝謝",
 
+sound:"特謝庫爾 艾德林",
 
-let recognition =
+level:"A1"
 
-new webkitSpeechRecognition();
-
-
-
-recognition.lang="tr-TR";
-
-
-recognition.start();
+},
 
 
 
-recognition.onresult=function(e){
+{
 
+tr:"Ne kadar?",
 
-let user=
+zh:"多少錢",
 
-e.results[0][0]
-.transcript;
+sound:"內 卡達",
 
+level:"生活"
 
-
-let score=
-
-calculateScore(
-target,
-user
-);
+},
 
 
 
-alert(
+{
 
-"你的發音評分："
+tr:"Lütfen",
 
-+
+zh:"請",
 
-score
+sound:"呂特芬",
 
-+
+level:"A1"
 
-"/100"
-
-);
+},
 
 
-};
 
+{
+
+tr:"Su",
+
+zh:"水",
+
+sound:"蘇",
+
+level:"超市"
 
 }
 
 
 
-
-
-function calculateScore(a,b){
-
-
-if(a===b){
-
-return 100;
-
-}
-
-
-return 70;
-
-}
+];
