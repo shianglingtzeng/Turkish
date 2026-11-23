@@ -1,231 +1,459 @@
-<!doctype html>
-<html lang="zh-Hant">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="土耳其語">
-<meta name="theme-color" content="#f7f4ef">
-<title>Turkish Survival｜伊斯坦堡生存土耳其語</title>
-<style>
-:root{--bg:#f7f4ef;--card:#fff;--ink:#2f2b27;--mute:#6d665e;--line:#e6dfd4;--acc:#c0392b;--acc2:#a5321f;--soft:#f3ece2;--r:14px}
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+<!DOCTYPE html>
+<html lang="zh-TW">
 
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 -apple-system,"PingFang TC","Noto Sans TC",sans-serif;padding-bottom:calc(76px + env(safe-area-inset-bottom))}
-header{position:sticky;top:0;z-index:5;background:rgba(247,244,239,.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:calc(12px + env(safe-area-inset-top)) 16px 10px;border-bottom:1px solid var(--line)}
-header h1{margin:0;font-size:20px}
-header p{margin:2px 0 0;color:var(--mute);font-size:13px}
-main{max-width:760px;margin:0 auto;padding:12px 14px}
-.tab{display:none}.tab.on{display:block}
-section.box{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;margin:12px 0;box-shadow:0 1px 2px rgba(0,0,0,.04)}
-section.box>h2{margin:0 0 8px;font-size:17px}
-.hint{color:var(--mute);font-size:13px;margin:0 0 8px}
-button{font:inherit;font-size:14px;border:1px solid var(--line);background:var(--soft);color:var(--ink);border-radius:10px;padding:8px 12px;margin:3px 4px 3px 0;cursor:pointer;min-height:38px}
-button:hover{border-color:#cbbfae}
-button.main{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:700}
-input,select,textarea{font:inherit;font-size:16px;width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);margin:4px 0}
-textarea{min-height:80px}
-.row{display:flex;gap:8px;align-items:center}.row input{flex:1}.row button{flex:none}
-.wordCard{background:var(--soft);border-radius:12px;padding:10px 12px;margin:8px 0}
-.wordCard h2,.wordCard h3{margin:4px 0;font-size:16px}.wordCard p{margin:4px 0}
-.out:empty{display:none}.out{margin-top:8px}
-#lessonArea{scroll-margin-top:90px}
-#dayMenu{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:6px}
-.day-button{text-align:left;font-size:13px;line-height:1.4;margin:0;padding:8px 10px}
-.day-done{background:#e5f2e8;border-color:#bfdcc6}
-.progress{height:10px;background:var(--soft);border-radius:99px;overflow:hidden;margin:6px 0}
-.progress-bar{height:100%;background:var(--acc)}
-#dailyMission h3{margin:0;font-size:14px;color:var(--acc)}#dailyMission h4{margin:2px 0 6px;font-size:18px}
-nav{position:fixed;left:0;right:0;bottom:0;z-index:6;display:grid;grid-template-columns:repeat(6,1fr);background:rgba(255,255,255,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
-nav button{border:0;background:none;border-radius:0;margin:0;padding:8px 0 10px;font-size:12px;color:var(--mute);display:flex;flex-direction:column;align-items:center;gap:2px;min-height:56px}
-nav button span{font-size:20px;line-height:1}
-nav button.on{color:var(--acc);font-weight:700}
-details.box summary{cursor:pointer;font-weight:700;font-size:17px;list-style:none}
-details.box summary::after{content:"＋";float:right;color:var(--mute)}
-details.box[open] summary::after{content:"－"}
-details.box{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;margin:12px 0}
-</style>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#c8102e">
+
+<title>🇹🇷 Turkish Survival System</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="pwa/manifest.json">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
 </head>
+
+
 <body>
-<header><h1>🇹🇷 Turkish Survival</h1><p>伊斯坦堡生存土耳其語・A1 課程</p></header>
+
+<header>
+    <h1>🇹🇷 Turkish Survival System</h1>
+    <p>Istanbul Life Assistant</p>
+    <p>30 Days A1 Survival Course</p>
+</header>
+
+
+<nav class="quicknav">
+    <a href="#today">今日</a>
+    <a href="#course">課程</a>
+    <a href="#dict">字典</a>
+    <a href="#ai">AI老師</a>
+    <a href="#speak">聽說</a>
+    <a href="#test">測驗</a>
+    <a href="#grammar">文法</a>
+    <a href="#verb">動詞</a>
+    <a href="#shop">購物</a>
+    <a href="#food">餐廳</a>
+    <a href="#move">交通</a>
+    <a href="#gov">文件</a>
+    <a href="#phrase">短句</a>
+    <a href="#life">生活圈</a>
+    <a href="#backup">備份</a>
+</nav>
+
+
 <main>
 
-<!-- ===== 今日 ===== -->
-<div class="tab on" id="tab-home">
-  <section class="box"><h2>📅 今日任務</h2><div id="dailyMission"></div>
-    <button class="main" onclick="dailyCheckIn()">✅ 今日學習打卡</button></section>
-  <section class="box"><h2>📊 學習進度</h2><div id="dashboard"></div></section>
-  <section class="box"><h2>🏠 我的伊斯坦堡生活</h2><div id="myLife" class="out"></div></section>
-</div>
+<!-- ============ 今日任務 ============ -->
+<section class="card" id="today">
+    <h2>📅 今日任務</h2>
+    <div id="dailyMission">載入今日任務...</div>
+    <button onclick="dailyCheckIn()">✅ 完成今日學習</button>
+</section>
 
-<!-- ===== 課程 ===== -->
-<div class="tab" id="tab-course">
-  <section class="box"><h2>📚 A1 課程</h2><p class="hint">點任一天開啟課程；學完按「我學完這一課」。</p><div id="dayMenu"></div>
-    <button onclick="showCourseOverview()">📋 課程總覽</button><div id="overviewBox" class="out"></div></section>
-  <section class="box"><div id="lessonArea"><p class="hint">選一天開始上課。</p></div><div id="speakingResult" class="out"></div></section>
-</div>
 
-<!-- ===== 查詢 ===== -->
-<div class="tab" id="tab-search">
-  <section class="box"><h2>🔍 單字查詢</h2>
-    <div class="row"><input id="searchInput" placeholder="輸入土耳其文或中文" onkeydown="if(event.key==='Enter')searchWord()"><button class="main" onclick="searchWord()">查</button></div>
-    <div id="searchResult" class="out"></div></section>
-  <section class="box"><h2>🔤 動詞查詢</h2>
-    <div class="row"><input id="verbSearch" placeholder="例如 gitmek、gidiyorum" onkeydown="if(event.key==='Enter')searchVerb()"><button class="main" onclick="searchVerb()">查</button></div>
-    <div id="verbResult" class="out"></div></section>
-  <section class="box"><h2>📐 文法查詢</h2>
-    <div class="row"><input id="grammarInput" placeholder="例如 過去式、-de/-da" onkeydown="if(event.key==='Enter')searchGrammar()"><button class="main" onclick="searchGrammar()">查</button></div>
-    <div id="grammarResult" class="out"></div>
-    <button onclick="showGrammarRules()">📖 文法規則速查</button><div id="grammarRuleBox" class="out"></div></section>
-  <section class="box"><h2>🧑‍🏫 問老師</h2>
-    <div class="row"><input id="aiInput" placeholder="想說的中文，例如：我想買水" onkeydown="if(event.key==='Enter')askTeacher()"><button class="main" onclick="askTeacher()">問</button></div>
-    <div id="aiAnswer" class="out"></div></section>
-</div>
+<section class="card">
+    <h2>⭐ 我的學習進度</h2>
+    <div id="dashboard"></div>
+</section>
 
-<!-- ===== 練習 ===== -->
-<div class="tab" id="tab-practice">
-  <section class="box"><h2>🃏 單字卡</h2><button class="main" onclick="generateCard()">抽一張</button><div id="flashcard" class="out"></div></section>
-  <section class="box"><h2>🔁 複習</h2><button class="main" onclick="startReview()">開始複習</button><div id="reviewArea" class="out"></div></section>
-  <section class="box"><h2>✏️ 文法填空</h2><button class="main" onclick="loadGrammarQuiz()">開始</button><div id="quizBox" class="out"></div><div id="quizAnswer" class="out"></div></section>
-  <section class="box"><h2>🔤 動詞測驗</h2><button class="main" onclick="loadVerbQuiz()">開始</button><div id="verbQuizBox" class="out"></div><div id="verbAnswer" class="out"></div></section>
-  <section class="box"><h2>🎧 聽力測驗</h2><button class="main" onclick="loadListeningQuestion()">開始</button><div id="listeningBox" class="out"></div></section>
-  <section class="box"><h2>🎓 A1 模擬測驗</h2><button class="main" onclick="startA1Test()">開始測驗</button><div id="testArea" class="out"></div></section>
-  <section class="box"><h2>🗣 跟讀練習</h2><button class="main" onclick="startShadowing()">抽一句</button><button onclick="showShadowAnswer()">看答案</button><div id="shadowBox" class="out"></div><div id="shadowAnswer" class="out"></div></section>
-  <section class="box"><h2>🔊 發音練習</h2><p class="hint">點一個字，先聽再對著手機說（需要允許麥克風）。</p><div id="pronunciationList"></div></section>
-  <section class="box"><h2>💬 情境對話</h2><button class="main" onclick="nextDialogue()">下一段</button><div id="dialogueArea" class="out"></div></section>
-  <section class="box"><h2>🎭 角色扮演</h2><div>
-    <button onclick="selectRole('超市店員')">🛒 超市店員</button><button onclick="selectRole('咖啡店員')">☕ 咖啡店員</button><button onclick="selectRole('房東')">🏠 房東</button><button onclick="selectRole('Metro工作人員')">🚇 Metro</button></div>
-    <div id="chatBox" class="wordCard"><p class="hint">先選一個角色。</p></div>
-    <div class="row"><input id="userMessage" placeholder="用中文說你想說的" onkeydown="if(event.key==='Enter')sendMessage()"><button class="main" onclick="sendMessage()">送出</button></div></section>
-</div>
 
-<!-- ===== 生活 ===== -->
-<div class="tab" id="tab-life">
-  <section class="box"><h2>🧭 情境生存包</h2><select id="lifeSituation"></select><button class="main" onclick="startLifeGuide()">看要說什麼</button><div id="lifeResult" class="out"></div></section>
-  <section class="box"><h2>💬 生活短句</h2><div>
-    <button onclick="showPhrasebook('greeting')">👋 鄰居問候</button><button onclick="showPhrasebook('restaurant')">🍽 餐廳</button><button onclick="showPhrasebook('order')">🥙 點餐</button><button onclick="showPhrasebook('checkout')">🧾 結帳</button><button onclick="showPhrasebook('allergy')">🚫 飲食禁忌</button><button onclick="showPhrasebook('official')">🏛 公家機關</button><button onclick="showPhrasebook('kart')">🎫 Istanbulkart</button></div>
-    <div id="phraseBox" class="out"></div></section>
-  <section class="box"><h2>📍 我的生活圈</h2><button class="main" onclick="showIstanbul()">顯示</button><div id="istanbulResult" class="out"></div></section>
-  <section class="box"><h2>🚇 交通</h2><div class="row"><input id="transportInput" placeholder="例如 metro、Marmaray、轉乘" onkeydown="if(event.key==='Enter')searchTransport()"><button class="main" onclick="searchTransport()">查</button></div><div id="transportResult" class="out"></div></section>
-  <section class="box"><h2>🥙 菜單</h2><div class="row"><input id="foodInput" placeholder="菜單上的字，例如 tavuk" onkeydown="if(event.key==='Enter')searchFood()"><button class="main" onclick="searchFood()">查</button></div><div id="foodResult" class="out"></div>
-    <button onclick="showOrderPhrase()">點餐句子</button><button onclick="showCheckoutPhrase()">結帳句子</button><div id="orderBox" class="out"></div><div id="checkoutBox" class="out"></div></section>
-  <section class="box"><h2>🛒 購物與超市</h2><div class="row"><input id="shoppingInput" placeholder="想買什麼" onkeydown="if(event.key==='Enter')searchShopping()"><button class="main" onclick="searchShopping()">查</button></div><div id="shoppingResult" class="out"></div>
-    <p class="hint">包裝上的土耳其文：</p><div class="row"><input id="cameraText" placeholder="例如 süt、yumurta" onkeydown="if(event.key==='Enter')scanTurkish()"><button class="main" onclick="scanTurkish()">辨識</button></div><div id="scanResult" class="out"></div>
-    <p class="hint">包裝文字查詢（整段貼上）：</p><textarea id="ocrInput" placeholder="把包裝上的字整段貼上"></textarea><button onclick="scanText()">查詢</button><div id="ocrResult" class="out"></div></section>
-  <section class="box"><h2>👋 社交用語</h2><div class="row"><input id="socialInput" placeholder="例如 謝謝、你好嗎" onkeydown="if(event.key==='Enter')searchSocial()"><button class="main" onclick="searchSocial()">查</button></div><div id="socialResult" class="out"></div></section>
-  <section class="box"><h2>❓ 生活問題</h2><div class="row"><input id="lifeQuestion" placeholder="例如 怎麼繳電費" onkeydown="if(event.key==='Enter')askLifeAI()"><button class="main" onclick="askLifeAI()">問</button></div><div id="lifeAnswer" class="out"></div></section>
-  <section class="box"><h2>💰 折扣計算</h2><div class="row"><input id="priceInput" type="number" inputmode="decimal" placeholder="原價 TL"><input id="discountInput" type="number" inputmode="decimal" placeholder="折扣 %"></div><button class="main" onclick="calculateDiscount()">計算</button><div id="priceResult" class="out"></div></section>
-</div>
+<section class="card">
+    <h2>🔁 單字複習</h2>
+    <button onclick="startReview()">抽 5 個單字（優先答錯過的）</button>
+    <div id="reviewArea"></div>
+</section>
 
-<!-- ===== 文件 ===== -->
-<div class="tab" id="tab-docs">
-  <section class="box"><h2>📄 看懂文件</h2><p class="hint">貼上帳單、租約、公文上的土耳其文。</p><textarea id="documentInput" placeholder="例如 Son ödeme tarihi"></textarea><button class="main" onclick="analyzeDocument()">分析</button><div id="documentResult" class="out"></div></section>
-  <section class="box"><h2>🗂 辦事清單與租約字彙</h2><button class="main" onclick="showDocuments()">顯示</button><div id="checklistBox" class="out"></div></section>
-  <section class="box"><h2>⚠️ 待加強單字</h2><button class="main" onclick="showWeakWords()">顯示</button><div id="weakBox" class="out"></div></section>
-  <section class="box"><h2>💾 備份紀錄</h2><p class="hint">學習紀錄存在這支手機的瀏覽器裡。換手機前先匯出。</p>
+
+<section class="card">
+    <h2>⚠️ 待加強單字</h2>
+    <button onclick="showWeakWords()">列出答錯過的字</button>
+    <div id="weakBox"></div>
+</section>
+
+
+<section class="card" id="backup">
+    <h2>💾 學習紀錄備份</h2>
+    <p style="font-size:14px;color:#666">
+        紀錄存在這個瀏覽器裡。換手機、換瀏覽器或換網址都不會跟著走，
+        清除瀏覽資料也會一起消失。定期匯出一份比較保險。
+    </p>
     <button onclick="exportProgress()">⬇️ 匯出備份</button>
-    <label style="display:inline-block"><span class="hint" style="display:block;margin:6px 0 0">⬆️ 匯入備份檔：</span><input type="file" accept=".json,application/json" onchange="importProgress(this)"></label>
+    <button onclick="document.getElementById('importFile').click()">⬆️ 匯入還原</button>
+    <input type="file" id="importFile" accept="application/json,.json"
+           style="display:none" onchange="importProgress(this)">
     <button onclick="resetProgress()">🗑 清除全部紀錄</button>
-    <div id="backupBox" class="out"></div></section>
-</div>
+    <div id="backupBox"></div>
+</section>
+
+
+<!-- ============ 30 天課程 ============ -->
+<section class="card" id="course">
+    <h2>📚 Day 1 - Day 30 A1課程</h2>
+    <div id="dayMenu"></div>
+    <div id="lessonArea"></div>
+</section>
+
+
+<section class="card">
+    <h2>🗺 課程速覽</h2>
+    <button onclick="showCourseOverview()">看課綱與口說考題</button>
+    <div id="overviewBox"></div>
+</section>
+
+
+<!-- ============ 字典 ============ -->
+<section class="card" id="dict">
+    <h2>🔎 土耳其生活搜尋</h2>
+    <input id="searchInput" placeholder="輸入中文或土耳其文，例如：牛奶 / Süt / 價格">
+    <button onclick="searchWord()">搜尋</button>
+    <div class="chips">
+        <button onclick="quickSearch('價格')">價格</button>
+        <button onclick="quickSearch('管理費')">管理費</button>
+        <button onclick="quickSearch('折扣')">折扣</button>
+        <button onclick="quickSearch('有效期限')">有效期限</button>
+    </div>
+    <div id="searchResult"></div>
+</section>
+
+
+<section class="card">
+    <h2>🃏 單字閃卡</h2>
+    <button onclick="generateCard()">抽一張</button>
+    <div id="flashcard"></div>
+</section>
+
+
+<!-- ============ AI 老師 ============ -->
+<section class="card" id="ai">
+    <h2>🤖 AI土耳其老師</h2>
+    <textarea id="aiInput" placeholder="例如：我要買水 / 這多少錢 / 怎麼去地鐵"></textarea>
+    <button onclick="askTeacher()">詢問老師</button>
+    <div id="aiAnswer"></div>
+</section>
+
+
+<section class="card">
+    <h2>💡 生活問答</h2>
+    <input id="lifeQuestion" placeholder="例如：多少錢 / 牛奶 / 地鐵">
+    <button onclick="askLifeAI()">問一下</button>
+    <div id="lifeAnswer"></div>
+</section>
+
+
+<section class="card">
+    <h2>🆘 情境生存包</h2>
+    <select id="lifeSituation"></select>
+    <button onclick="startLifeGuide()">看該說什麼</button>
+    <div id="lifeResult"></div>
+</section>
+
+
+<!-- ============ 聽 / 說 ============ -->
+<section class="card" id="speak">
+    <h2>🗣 AI角色情境練習</h2>
+    <div>
+        <button onclick="selectRole('超市店員')">🛒 超市</button>
+        <button onclick="selectRole('咖啡店員')">☕ 咖啡</button>
+        <button onclick="selectRole('房東')">🏠 房東</button>
+        <button onclick="selectRole('Metro工作人員')">🚇 地鐵</button>
+    </div>
+    <div id="chatBox">請選擇角色開始練習</div>
+    <input id="userMessage" placeholder="輸入你的回答">
+    <button onclick="sendMessage()">送出</button>
+</section>
+
+
+<section class="card">
+    <h2>💬 情境對話卡</h2>
+    <button onclick="nextDialogue()">下一組對話</button>
+    <div id="dialogueArea"></div>
+</section>
+
+
+<section class="card">
+    <h2>🔊 發音練習</h2>
+    <div id="pronunciationList" class="chips"></div>
+    <div id="speakingResult"></div>
+</section>
+
+
+<section class="card">
+    <h2>🎧 A1 聽力測驗</h2>
+    <button onclick="loadListeningQuestion()">開始聽力測驗</button>
+    <div id="listeningBox"></div>
+</section>
+
+
+<section class="card">
+    <h2>🎙 每日跟讀</h2>
+    <button onclick="startShadowing()">隨機一句</button>
+    <button onclick="showShadowAnswer()">看答案</button>
+    <div id="shadowBox"></div>
+    <div id="shadowAnswer"></div>
+</section>
+
+
+<!-- ============ 測驗 ============ -->
+<section class="card" id="test">
+    <h2>📝 A1模擬測驗</h2>
+    <div id="testArea"></div>
+    <button onclick="startA1Test()">開始測驗</button>
+</section>
+
+
+<!-- ============ 文法 ============ -->
+<section class="card" id="grammar">
+    <h2>📚 文法查詢</h2>
+    <input id="grammarInput" placeholder="例如：人稱 / 現在式 / Zamir">
+    <button onclick="searchGrammar()">查文法</button>
+    <div id="grammarResult"></div>
+</section>
+
+
+<section class="card">
+    <h2>📖 文法規則速查</h2>
+    <button onclick="showGrammarRules()">全部列出</button>
+    <div id="grammarRuleBox"></div>
+</section>
+
+
+<section class="card">
+    <h2>✏️ 文法填空</h2>
+    <button onclick="loadGrammarQuiz()">開始填空</button>
+    <div id="quizBox"></div>
+</section>
+
+
+<!-- ============ 動詞 ============ -->
+<section class="card" id="verb">
+    <h2>🔤 動詞變化查詢</h2>
+    <input id="verbSearch" placeholder="例如：gelmek / 去 / 想要">
+    <button onclick="searchVerb()">查動詞</button>
+    <button onclick="analyzeVerb(document.getElementById('verbSearch').value)">分析字尾</button>
+    <div id="verbResult"></div>
+</section>
+
+
+<section class="card">
+    <h2>🎯 動詞小測驗</h2>
+    <button onclick="loadVerbQuiz()">開始</button>
+    <div id="verbQuizBox"></div>
+</section>
+
+
+<!-- ============ 購物 ============ -->
+<section class="card" id="shop">
+    <h2>🛒 購物字彙</h2>
+    <input id="shoppingInput" placeholder="例如：Süt / 牛奶 / 麵包">
+    <button onclick="searchShopping()">查商品</button>
+    <div id="shoppingResult"></div>
+</section>
+
+
+<section class="card">
+    <h2>📷 超市商品助手</h2>
+    <input id="cameraText" placeholder="輸入包裝上的土文，例如：Son Kullanma Tarihi">
+    <button onclick="scanTurkish()">辨識</button>
+    <div id="scanResult"></div>
+</section>
+
+
+<section class="card">
+    <h2>🏷 包裝文字查詢</h2>
+    <input id="ocrInput" placeholder="例如：İçindekiler / Üretim Tarihi">
+    <button onclick="scanText()">查意思</button>
+    <div id="ocrResult"></div>
+</section>
+
+
+<section class="card">
+    <h2>🧮 折扣計算機</h2>
+    <input id="priceInput" type="number" placeholder="原價 (TL)">
+    <input id="discountInput" type="number" placeholder="折扣 % (例如 30)">
+    <button onclick="calculateDiscount()">計算</button>
+    <div id="priceResult"></div>
+</section>
+
+
+<!-- ============ 餐廳 ============ -->
+<section class="card" id="food">
+    <h2>🍽 土耳其料理查詢</h2>
+    <input id="foodInput" placeholder="例如：Kebap / 烤肉 / 湯">
+    <button onclick="searchFood()">查料理</button>
+    <div id="foodResult"></div>
+</section>
+
+
+<!-- ============ 交通 ============ -->
+<section class="card" id="move">
+    <h2>🚇 交通字彙</h2>
+    <input id="transportInput" placeholder="例如：Metro / 地鐵 / 轉乘">
+    <button onclick="searchTransport()">查交通</button>
+    <div id="transportResult"></div>
+</section>
+
+
+<!-- ============ 社交 ============ -->
+<section class="card">
+    <h2>👋 社交用語</h2>
+    <input id="socialInput" placeholder="例如：Merhaba / 你好 / 謝謝">
+    <button onclick="searchSocial()">查用語</button>
+    <div id="socialResult"></div>
+</section>
+
+
+<!-- ============ 公家文件 ============ -->
+<section class="card" id="gov">
+    <h2>🏛 公文／表格解讀</h2>
+    <textarea id="documentInput" placeholder="貼上文件上的土耳其文，例如：Adres Kaydı"></textarea>
+    <button onclick="analyzeDocument()">解讀</button>
+    <div id="documentResult"></div>
+</section>
+
+
+<section class="card">
+    <h2>📄 辦事文件清單</h2>
+    <button onclick="showDocuments()">列出清單與租約字彙</button>
+    <div id="checklistBox"></div>
+</section>
+
+
+<!-- ============ 短句庫 ============ -->
+<section class="card" id="phrase">
+    <h2>💬 生活短句庫</h2>
+    <div class="chips">
+        <button onclick="showPhrasebook('intro')">自我介紹</button>
+        <button onclick="showPhrasebook('greeting')">鄰居</button>
+        <button onclick="showPhrasebook('restaurant')">餐廳</button>
+        <button onclick="showPhrasebook('order')">點餐</button>
+        <button onclick="showPhrasebook('checkout')">結帳</button>
+        <button onclick="showPhrasebook('allergy')">飲食禁忌</button>
+        <button onclick="showPhrasebook('official')">公家機關</button>
+        <button onclick="showPhrasebook('work')">辦公室</button>
+        <button onclick="showPhrasebook('kart')">Istanbulkart</button>
+    </div>
+    <div id="phraseBox"></div>
+</section>
+
+
+<!-- ============ 生活圈 ============ -->
+<section class="card" id="life">
+    <h2>📍 Istanbul生活模式</h2>
+    <button onclick="showIstanbul()">開啟我的生活圈</button>
+    <div id="istanbulResult"></div>
+</section>
+
+
+<section class="card">
+    <h2>🏠 我的常用場景</h2>
+    <div id="myLife"></div>
+</section>
 
 </main>
 
-<nav>
-  <button class="on" data-tab="home"><span>🏠</span>今日</button>
-  <button data-tab="course"><span>📚</span>課程</button>
-  <button data-tab="search"><span>🔍</span>查詢</button>
-  <button data-tab="practice"><span>🎯</span>練習</button>
-  <button data-tab="life"><span>🧭</span>生活</button>
-  <button data-tab="docs"><span>📄</span>文件</button>
-</nav>
 
-<!-- 資料檔要先載入，功能檔在後；ui_bridge.js 最後載入（它會取代舊的 openLesson） -->
-<script src="vocabulary_database.js"></script>
-<script src="verb_database.js"></script>
-<script src="food_database.js"></script>
-<script src="istanbul_database.js"></script>
-<script src="istanbul_life.js"></script>
-<script src="istanbul_survival_map.js"></script>
-<script src="location_database.js"></script>
-<script src="my_istanbul.js"></script>
-<script src="transport_database.js"></script>
-<script src="shopping_database.js"></script>
-<script src="social_database.js"></script>
-<script src="product_database.js"></script>
-<script src="package_dictionary.js"></script>
-<script src="document_checklist.js"></script>
-<script src="document_dictionary.js"></script>
-<script src="document_helper.js"></script>
-<script src="official_phrases.js"></script>
-<script src="neighbor_mode.js"></script>
-<script src="restaurant_dialogue.js"></script>
-<script src="allergy_helper.js"></script>
-<script src="daily_situation.js"></script>
-<script src="daily_a1.js"></script>
-<script src="a1_course.js"></script>
-<script src="speaking_exam.js"></script>
-<script src="pronunciation_teacher.js"></script>
-<script src="ai_roleplay.js"></script>
-<script src="grammar.js"></script>
-<script src="course_a1_part1.js"></script>
-<script src="course_a1_part2.js"></script>
-<script src="course_a1_part3.js"></script>
-<script src="course_loader.js"></script>
-<script src="progress_store.js"></script>
-<script src="speaking.js"></script>
-<script src="listening_engine.js"></script>
-<script src="map.js"></script>
-<script src="search.js"></script>
-<script src="verb_ai.js"></script>
-<script src="verb_analyzer.js"></script>
-<script src="favorite_verbs.js"></script>
-<script src="grammar_ai.js"></script>
-<script src="ai_teacher.js"></script>
-<script src="camera.js"></script>
-<script src="camera_ocr.js"></script>
-<script src="supermarket_ai.js"></script>
-<script src="government_ai.js"></script>
-<script src="menu_ai.js"></script>
-<script src="metro_ai.js"></script>
-<script src="shopping_ai.js"></script>
-<script src="greeting_ai.js"></script>
-<script src="life_ai.js"></script>
-<script src="istanbul_life_ai.js"></script>
-<script src="istanbulkart_ai.js"></script>
-<script src="food_order.js"></script>
-<script src="checkout_phrase.js"></script>
-<script src="tl_calculator.js"></script>
-<script src="sentence_builder.js"></script>
-<script src="flashcard_engine.js"></script>
-<script src="review.js"></script>
-<script src="grammar_quiz.js"></script>
-<script src="verb_quiz.js"></script>
-<script src="listening_exam.js"></script>
-<script src="a1_test.js"></script>
-<script src="daily_audio.js"></script>
-<script src="dialogue.js"></script>
-<script src="conversation_engine.js"></script>
-<script src="profile.js"></script>
-<script src="progress.js"></script>
-<script src="app.js"></script>
-<script src="ui_bridge.js"></script>
+<footer>
+    <p>Turkish Survival System v9.1</p>
+    <p>Made for Istanbul Life 🇹🇷</p>
+</footer>
+
+
+<!-- ================= COURSE（30天課程，單一資料來源） ================= -->
+<script src="js/course_a1_part1.js"></script>
+<script src="js/course_a1_part2.js"></script>
+<script src="js/course_a1_part3.js"></script>
+<script src="js/course_loader.js"></script>
+
+
+<!-- ================= DATABASE ================= -->
+<script src="js/istanbul_database.js"></script>
+<script src="js/product_database.js"></script>
+<script src="js/package_dictionary.js"></script>
+<script src="js/shopping_database.js"></script>
+<script src="js/food_database.js"></script>
+<script src="js/transport_database.js"></script>
+<script src="js/social_database.js"></script>
+<script src="js/verb_database.js"></script>
+<script src="js/vocabulary_database.js"></script>
+<script src="js/document_dictionary.js"></script>
+<script src="js/document_helper.js"></script>
+<script src="js/document_checklist.js"></script>
+<script src="js/location_database.js"></script>
+<script src="js/istanbul_survival_map.js"></script>
+<script src="js/istanbul_life.js"></script>
+<script src="js/my_istanbul.js"></script>
+<script src="js/daily_situation.js"></script>
+<script src="js/daily_a1.js"></script>
+<script src="js/a1_course.js"></script>
+<script src="js/ai_roleplay.js"></script>
+<script src="js/official_phrases.js"></script>
+<script src="js/neighbor_mode.js"></script>
+<script src="js/restaurant_dialogue.js"></script>
+<script src="js/allergy_helper.js"></script>
+<script src="js/checkout_phrase.js"></script>
+<script src="js/food_order.js"></script>
+<script src="js/istanbulkart_ai.js"></script>
+<script src="js/speaking_exam.js"></script>
+<script src="js/grammar.js"></script>
+<script src="js/pronunciation_teacher.js"></script>
+<script src="conversation_trainer.js"></script>
+<script src="workplace_dialogue.js"></script>
+
+
+<!-- ================= FUNCTION ================= -->
+<script src="js/speaking.js"></script>
+<script src="js/listening_engine.js"></script>
+<script src="js/progress_store.js"></script>
+<script src="js/app.js"></script>
+<script src="js/progress.js"></script>
+<script src="js/review.js"></script>
+<script src="js/search.js"></script>
+<script src="js/flashcard_engine.js"></script>
+<script src="js/supermarket_ai.js"></script>
+<script src="js/camera.js"></script>
+<script src="js/camera_ocr.js"></script>
+<script src="js/ai_teacher.js"></script>
+<script src="js/life_ai.js"></script>
+<script src="js/istanbul_life_ai.js"></script>
+<script src="js/dialogue.js"></script>
+<script src="js/conversation_engine.js"></script>
+<script src="js/listening_exam.js"></script>
+<script src="js/daily_audio.js"></script>
+<script src="js/a1_test.js"></script>
+<script src="js/grammar_ai.js"></script>
+<script src="js/grammar_quiz.js"></script>
+<script src="js/verb_ai.js"></script>
+<script src="js/verb_analyzer.js"></script>
+<script src="js/verb_quiz.js"></script>
+<script src="js/shopping_ai.js"></script>
+<script src="js/menu_ai.js"></script>
+<script src="js/metro_ai.js"></script>
+<script src="js/greeting_ai.js"></script>
+<script src="js/government_ai.js"></script>
+<script src="js/tl_calculator.js"></script>
+<script src="js/sentence_builder.js"></script>
+<script src="js/favorite_verbs.js"></script>
+<script src="js/profile.js"></script>
+<script src="js/map.js"></script>
+<script src="js/ui_bridge.js"></script>
+
+
 <script>
-// 分頁切換；課程裡按「開啟」時自動切到課程頁
-function showTab(name) {
-  document.querySelectorAll(".tab").forEach(t => t.classList.toggle("on", t.id === "tab-" + name));
-  document.querySelectorAll("nav button").forEach(b => b.classList.toggle("on", b.dataset.tab === name));
-  window.scrollTo(0, 0);
+/* PWA 啟動 */
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+        navigator.serviceWorker.register("service-worker.js")
+            .catch(function (error) {
+                console.warn("PWA Service Worker 啟動失敗：", error);
+            });
+    });
 }
-document.querySelectorAll("nav button").forEach(b => b.onclick = () => showTab(b.dataset.tab));
-(function () {
-  const orig = window.renderLesson;
-  if (typeof orig !== "function") return;
-  window.openLesson = window.renderLesson = function (day) {
-    showTab("course"); orig(day);
-    const a = document.getElementById("lessonArea"); if (a) a.scrollIntoView({ block: "start" });
-  };
-})();
 </script>
+
 </body>
 </html>
