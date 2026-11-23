@@ -11,7 +11,7 @@
 ================================= */
 
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("🇹🇷 Turkish Survival System v9.0 Started");
+    console.log("🇹🇷 Turkish Survival System v9.1 Started");
     initializeApp();
 });
 
@@ -102,7 +102,7 @@ function quickSearch(word) {
 
 function systemInfo() {
     return {
-        version: "9.0",
+        version: "9.1",
         language: "Turkish",
         location: "Istanbul",
         course: "A1 Survival",
