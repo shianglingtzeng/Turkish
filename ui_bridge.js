@@ -222,6 +222,9 @@ function renderLesson(day) {
     const area = document.getElementById("lessonArea");
     if (!area) return;
 
+    /* 換課先停掉上一課的朗讀，否則會疊在一起念 */
+    if (typeof stopLesson === "function") stopLesson();
+
     const lesson = courseA1.find(x => x.day === day);
     if (!lesson) return;
 
@@ -251,12 +254,14 @@ function renderLesson(day) {
 
         <h3>💬 情境對話：${lesson.dialogue.title}</h3>
         <div class="wordCard">
-            ${lesson.dialogue.lines.map(l => `
-                <p><b>${l.who}</b>：${l.tr}
-                    <button onclick="speakTurkish('${ttsArg(l.tr)}')">🔊</button>
-                    <br><span style="color:#666">${l.zh}</span></p>
-            `).join("")}
-            <button onclick="playLesson(${lesson.day})">▶️ 整段朗讀</button>
+            <div id="dialogueLines">
+                ${lesson.dialogue.lines.map(l => `
+                    <p class="dialogue-line"><b>${l.who}</b>：${l.tr}
+                        <button onclick="speakTurkish('${ttsArg(l.tr)}')">🔊</button>
+                        <br><span style="color:#666">${l.zh}</span></p>
+                `).join("")}
+            </div>
+            <button id="playBtn" onclick="playLesson(${lesson.day})">▶️ 整段朗讀</button>
         </div>
 
         <div class="wordCard">
@@ -278,22 +283,118 @@ function renderLesson(day) {
 }
 
 
-/* 整段對話依序朗讀 */
+/* =================================
+   整段對話依序朗讀（v9.1 重寫）
+
+   舊版把每一句都丟進 speechSynthesis 佇列就不管了。
+   Chrome 的 cancel() 是非同步的，連續 speak() 在語音引擎
+   還沒就緒時會丟句或亂序，手機尤其明顯。
+   改成用 onend 一句播完再播下一句，並標出正在念的那句。
+================================= */
+
+let lessonPlayer = { day: null, index: 0, playing: false };
+
+
+function pickTurkishVoice() {
+    const voices = window.speechSynthesis.getVoices() || [];
+    return voices.find(v => v.lang === "tr-TR")
+        || voices.find(v => (v.lang || "").indexOf("tr") === 0)
+        || null;
+}
+
+
+function highlightLine(i) {
+    const rows = document.querySelectorAll("#dialogueLines .dialogue-line");
+    rows.forEach((el, n) => el.classList.toggle("speaking", n === i));
+}
+
+
+function stopLesson() {
+    lessonPlayer.playing = false;
+    window.speechSynthesis.cancel();
+    highlightLine(-1);
+
+    const btn = document.getElementById("playBtn");
+    if (btn) btn.innerHTML = "▶️ 整段朗讀";
+}
+
+
 function playLesson(day) {
+    if (!("speechSynthesis" in window)) {
+        alert("⚠️ 此瀏覽器不支援語音朗讀");
+        return;
+    }
+
+    /* 正在念就當成停止鍵 */
+    if (lessonPlayer.playing) {
+        stopLesson();
+        return;
+    }
+
     const lesson = courseA1.find(x => x.day === day);
-    if (!lesson || !("speechSynthesis" in window)) return;
+    if (!lesson) return;
 
     window.speechSynthesis.cancel();
 
-    lesson.dialogue.lines.forEach(l => {
-        const u = new SpeechSynthesisUtterance(l.tr);
-        u.lang = "tr-TR";
-        u.rate = 0.8;
-        window.speechSynthesis.speak(u);
-    });
+    lessonPlayer = { day: day, index: 0, playing: true };
+
+    const btn = document.getElementById("playBtn");
+    if (btn) btn.innerHTML = "⏹ 停止朗讀";
+
+    /* cancel() 是非同步的，等一下再開始，避免第一句被吃掉 */
+    setTimeout(function () { speakNextLine(lesson); }, 120);
+}
+
+
+function speakNextLine(lesson) {
+    if (!lessonPlayer.playing) return;
+
+    const i = lessonPlayer.index;
+    const line = lesson.dialogue.lines[i];
+
+    if (!line) {
+        stopLesson();
+        return;
+    }
+
+    highlightLine(i);
+
+    const u = new SpeechSynthesisUtterance(line.tr);
+    const voice = pickTurkishVoice();
+
+    if (voice) u.voice = voice;
+    u.lang = "tr-TR";
+    u.rate = 0.85;
+
+    /* 念完才排下一句，中間留一點停頓，聽起來像兩個人在對話 */
+    u.onend = function () {
+        if (!lessonPlayer.playing) return;
+        lessonPlayer.index++;
+        setTimeout(function () { speakNextLine(lesson); }, 450);
+    };
+
+    /* 萬一某一句出錯，不要整段卡死，跳過它繼續 */
+    u.onerror = function () {
+        if (!lessonPlayer.playing) return;
+        lessonPlayer.index++;
+        setTimeout(function () { speakNextLine(lesson); }, 200);
+    };
+
+    window.speechSynthesis.speak(u);
+}
+
+
+/* 有些瀏覽器第一次取 voices 會是空的，載好後再取一次 */
+if ("speechSynthesis" in window) {
+    window.speechSynthesis.onvoiceschanged = function () { pickTurkishVoice(); };
 }
 
 
 window.openLesson = renderLesson;
 window.renderLesson = renderLesson;
 window.playLesson = playLesson;
+window.stopLesson = stopLesson;
+window.speakNextLine = speakNextLine;
+window.pickTurkishVoice = pickTurkishVoice;
+/* let 宣告不會自動掛到 window，除錯時要看播放狀態才拿得到 */
+window.getLessonPlayer = function () { return lessonPlayer; };
