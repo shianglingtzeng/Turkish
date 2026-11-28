@@ -244,6 +244,8 @@ function renderLesson(day) {
             <div class="wordCard">
                 <h3>🇹🇷 ${w.tr}
                     <button onclick="speakTurkish('${ttsArg(w.tr)}')">🔊</button>
+                    ${typeof toggleFavWord === "function" ? `<button class="fav-btn ${TS.isFavorite(wordKey(w.tr)) ? "on" : ""}" title="加入單字本"
+                        onclick="toggleFavWord(this, '${ttsArg(w.tr)}', '${ttsArg(w.zh || "")}', '${ttsArg(w.pron || "")}')">${TS.isFavorite(wordKey(w.tr)) ? "★" : "☆"}</button>` : ""}
                 </h3>
                 <p>🗣 ${w.pron}　｜　${w.zh}</p>
                 <p>${w.ex}<br>${w.exZh}
@@ -270,16 +272,51 @@ function renderLesson(day) {
         </div>
     `;
 
+    const last = Math.max.apply(null, courseA1.map(x => x.day));
+    const next = courseA1.find(x => x.day === day + 1);
+
     const btn = document.createElement("button");
     btn.className = done ? "day-button day-done" : "";
     btn.innerHTML = done ? "✅ 已完成，點一下取消" : "📗 我學完這一課";
     btn.onclick = function () {
-        if (TS.isDayDone(day)) TS.unmarkDay(day);
-        else TS.markDay(day);
+        if (TS.isDayDone(day)) {
+            TS.unmarkDay(day);
+            loadProgress();
+            renderLesson(day);
+            return;
+        }
+        TS.markDay(day);
         loadProgress();
-        renderLesson(day);
+        if (typeof loadDays === "function") loadDays();
+        // v10：學完直接帶到下一課
+        if (next) {
+            renderLesson(next.day);
+            const a = document.getElementById("lessonArea");
+            if (a) {
+                a.insertAdjacentHTML("afterbegin",
+                    `<p class="lesson-cheer">🎉 Day ${day} 完成！接著上 Day ${next.day}</p>`);
+                a.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+        } else {
+            renderLesson(day);
+            const a = document.getElementById("lessonArea");
+            if (a) a.insertAdjacentHTML("afterbegin",
+                `<p class="lesson-cheer">🎉 全部 ${last} 天的課程都上完了！</p>`);
+        }
     };
     area.appendChild(btn);
+
+    // 已經完成的課，也可以直接跳下一課
+    if (done && next) {
+        const nb = document.createElement("button");
+        nb.innerHTML = `下一課：Day ${next.day} ${next.title} →`;
+        nb.onclick = function () {
+            renderLesson(next.day);
+            const a = document.getElementById("lessonArea");
+            if (a) a.scrollIntoView({ behavior: "smooth", block: "start" });
+        };
+        area.appendChild(nb);
+    }
 }
 
 

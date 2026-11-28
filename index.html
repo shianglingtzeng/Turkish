@@ -31,6 +31,7 @@
     <a href="#today">今日</a>
     <a href="#course">課程</a>
     <a href="#dict">字典</a>
+    <a href="#wordbook">單字本</a>
     <a href="#ai">AI老師</a>
     <a href="#speak">聽說</a>
     <a href="#test">測驗</a>
@@ -108,8 +109,9 @@
 
 <!-- ============ 字典 ============ -->
 <section class="card" id="dict">
-    <h2>🔎 土耳其生活搜尋</h2>
-    <input id="searchInput" placeholder="輸入中文或土耳其文，例如：牛奶 / Süt / 價格">
+    <h2>🔎 土耳其文字典</h2>
+    <p class="dict-hint" id="dictHint">課程、購物、料理、交通、社交、公文、包裝文字、動詞，全部一起查。</p>
+    <input id="searchInput" placeholder="輸入中文或土耳其文，例如：牛奶 / Süt / gitmek" onkeydown="if(event.key==='Enter')searchWord()">
     <button onclick="searchWord()">搜尋</button>
     <div class="chips">
         <button onclick="quickSearch('價格')">價格</button>
@@ -118,6 +120,24 @@
         <button onclick="quickSearch('有效期限')">有效期限</button>
     </div>
     <div id="searchResult"></div>
+</section>
+
+
+<!-- ============ 單字本 ============ -->
+<section class="card" id="wordbook">
+    <h2>⭐ 我的單字本</h2>
+    <p class="dict-hint">在字典、課程裡按 ☆ 收藏；字典查不到的字也能自己加，再去其他 App 查意思。</p>
+    <div class="wb-add">
+        <input id="wbWord" placeholder="土耳其文，例如 bahçe">
+        <input id="wbZh" placeholder="中文意思（可以先空著）">
+        <button onclick="addOwnWord()">＋ 加入</button>
+    </div>
+    <div class="chips">
+        <button onclick="renderWordbook()">全部</button>
+        <button onclick="renderWordbook('nozh')">還沒寫意思的</button>
+        <button onclick="startWordbookQuiz()">🃏 用單字本複習</button>
+    </div>
+    <div id="wordbookList"></div>
 </section>
 
 
@@ -364,83 +384,83 @@
 
 
 <!-- ================= COURSE（30天課程，單一資料來源） ================= -->
-<script src="js/course_a1_part1.js"></script>
-<script src="js/course_a1_part2.js"></script>
-<script src="js/course_a1_part3.js"></script>
-<script src="js/course_loader.js"></script>
+<script src="course_a1_part1.js"></script>
+<script src="course_a1_part2.js"></script>
+<script src="course_a1_part3.js"></script>
+<script src="course_loader.js"></script>
 
 
 <!-- ================= DATABASE ================= -->
-<script src="js/istanbul_database.js"></script>
-<script src="js/product_database.js"></script>
-<script src="js/package_dictionary.js"></script>
-<script src="js/shopping_database.js"></script>
-<script src="js/food_database.js"></script>
-<script src="js/transport_database.js"></script>
-<script src="js/social_database.js"></script>
-<script src="js/verb_database.js"></script>
-<script src="js/vocabulary_database.js"></script>
-<script src="js/document_dictionary.js"></script>
-<script src="js/document_helper.js"></script>
-<script src="js/document_checklist.js"></script>
-<script src="js/location_database.js"></script>
-<script src="js/istanbul_survival_map.js"></script>
-<script src="js/istanbul_life.js"></script>
-<script src="js/my_istanbul.js"></script>
-<script src="js/daily_situation.js"></script>
-<script src="js/daily_a1.js"></script>
-<script src="js/a1_course.js"></script>
-<script src="js/ai_roleplay.js"></script>
-<script src="js/official_phrases.js"></script>
-<script src="js/neighbor_mode.js"></script>
-<script src="js/restaurant_dialogue.js"></script>
-<script src="js/allergy_helper.js"></script>
-<script src="js/checkout_phrase.js"></script>
-<script src="js/food_order.js"></script>
-<script src="js/istanbulkart_ai.js"></script>
-<script src="js/speaking_exam.js"></script>
-<script src="js/grammar.js"></script>
-<script src="js/pronunciation_teacher.js"></script>
+<script src="istanbul_database.js"></script>
+<script src="product_database.js"></script>
+<script src="package_dictionary.js"></script>
+<script src="shopping_database.js"></script>
+<script src="food_database.js"></script>
+<script src="transport_database.js"></script>
+<script src="social_database.js"></script>
+<script src="verb_database.js"></script>
+<script src="vocabulary_database.js"></script>
+<script src="document_dictionary.js"></script>
+<script src="document_helper.js"></script>
+<script src="document_checklist.js"></script>
+<script src="location_database.js"></script>
+<script src="istanbul_survival_map.js"></script>
+<script src="istanbul_life.js"></script>
+<script src="my_istanbul.js"></script>
+<script src="daily_situation.js"></script>
+<script src="daily_a1.js"></script>
+<script src="a1_course.js"></script>
+<script src="ai_roleplay.js"></script>
+<script src="official_phrases.js"></script>
+<script src="neighbor_mode.js"></script>
+<script src="restaurant_dialogue.js"></script>
+<script src="allergy_helper.js"></script>
+<script src="checkout_phrase.js"></script>
+<script src="food_order.js"></script>
+<script src="istanbulkart_ai.js"></script>
+<script src="speaking_exam.js"></script>
+<script src="grammar.js"></script>
+<script src="pronunciation_teacher.js"></script>
 <script src="conversation_trainer.js"></script>
 <script src="workplace_dialogue.js"></script>
 
 
 <!-- ================= FUNCTION ================= -->
-<script src="js/speaking.js"></script>
-<script src="js/listening_engine.js"></script>
-<script src="js/progress_store.js"></script>
-<script src="js/app.js"></script>
-<script src="js/progress.js"></script>
-<script src="js/review.js"></script>
-<script src="js/search.js"></script>
-<script src="js/flashcard_engine.js"></script>
-<script src="js/supermarket_ai.js"></script>
-<script src="js/camera.js"></script>
-<script src="js/camera_ocr.js"></script>
-<script src="js/ai_teacher.js"></script>
-<script src="js/life_ai.js"></script>
-<script src="js/istanbul_life_ai.js"></script>
-<script src="js/dialogue.js"></script>
-<script src="js/conversation_engine.js"></script>
-<script src="js/listening_exam.js"></script>
-<script src="js/daily_audio.js"></script>
-<script src="js/a1_test.js"></script>
-<script src="js/grammar_ai.js"></script>
-<script src="js/grammar_quiz.js"></script>
-<script src="js/verb_ai.js"></script>
-<script src="js/verb_analyzer.js"></script>
-<script src="js/verb_quiz.js"></script>
-<script src="js/shopping_ai.js"></script>
-<script src="js/menu_ai.js"></script>
-<script src="js/metro_ai.js"></script>
-<script src="js/greeting_ai.js"></script>
-<script src="js/government_ai.js"></script>
-<script src="js/tl_calculator.js"></script>
-<script src="js/sentence_builder.js"></script>
-<script src="js/favorite_verbs.js"></script>
-<script src="js/profile.js"></script>
-<script src="js/map.js"></script>
-<script src="js/ui_bridge.js"></script>
+<script src="speaking.js"></script>
+<script src="listening_engine.js"></script>
+<script src="progress_store.js"></script>
+<script src="app.js"></script>
+<script src="progress.js"></script>
+<script src="review.js"></script>
+<script src="search.js"></script>
+<script src="flashcard_engine.js"></script>
+<script src="supermarket_ai.js"></script>
+<script src="camera.js"></script>
+<script src="camera_ocr.js"></script>
+<script src="ai_teacher.js"></script>
+<script src="life_ai.js"></script>
+<script src="istanbul_life_ai.js"></script>
+<script src="dialogue.js"></script>
+<script src="conversation_engine.js"></script>
+<script src="listening_exam.js"></script>
+<script src="daily_audio.js"></script>
+<script src="a1_test.js"></script>
+<script src="grammar_ai.js"></script>
+<script src="grammar_quiz.js"></script>
+<script src="verb_ai.js"></script>
+<script src="verb_analyzer.js"></script>
+<script src="verb_quiz.js"></script>
+<script src="shopping_ai.js"></script>
+<script src="menu_ai.js"></script>
+<script src="metro_ai.js"></script>
+<script src="greeting_ai.js"></script>
+<script src="government_ai.js"></script>
+<script src="tl_calculator.js"></script>
+<script src="sentence_builder.js"></script>
+<script src="favorite_verbs.js"></script>
+<script src="profile.js"></script>
+<script src="map.js"></script>
+<script src="ui_bridge.js"></script>
 
 
 <script>

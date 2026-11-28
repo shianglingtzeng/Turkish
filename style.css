@@ -800,3 +800,22 @@ border-left:4px solid #c8102e;
 background:#3a3320;
 }
 }
+
+/* ===== v10 字典＋單字本 ===== */
+.dict-hint{ color:#6b7280; font-size:13px; margin:4px 0; }
+.dict-ok{ color:#166534; font-size:13px; font-weight:700; }
+.wc-head{ display:flex; justify-content:space-between; align-items:center; gap:8px; }
+.fav-btn{ font-size:22px; line-height:1; padding:4px 10px; background:transparent; border:1px solid #e5e7eb; color:#9ca3af; }
+.fav-btn.on{ color:#e0a020; border-color:#f3d48a; background:#fffbeb; }
+.ext-btn{ display:inline-block; padding:6px 12px; border:1px solid #d1d5db; border-radius:10px; font-size:13px; text-decoration:none; color:#1f2937; background:#fff; margin:3px 4px 3px 0; }
+.dict-more{ margin-top:8px; font-size:14px; }
+.dict-more summary{ cursor:pointer; color:#6b7280; }
+.wb-add{ display:flex; flex-wrap:wrap; gap:6px; margin:8px 0; }
+.wb-add input{ flex:1 1 140px; }
+.wb-missing{ color:#b45309; font-size:14px; }
+.wb-quiz{ text-align:center; }
+.wb-quiz h2{ font-size:28px; margin:10px 0; }
+.wb-answer{ font-size:22px; font-weight:700; margin:10px 0; }
+.wb-quiz .chips{ justify-content:center; }
+.lesson-cheer{ background:#ecfdf5; color:#065f46; border:1px solid #a7f3d0; border-radius:12px; padding:10px 14px; font-weight:700; }
+#lessonArea{ scroll-margin-top:90px; }

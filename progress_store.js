@@ -20,7 +20,8 @@ var TS = (function () {
             checkins: [],    // ["2026-08-18", ...]    打卡日期
             quiz: {},        // { a1: {best, total, attempts, lastAt} }
             words: {},       // { "Su": {right, wrong, lastAt, zh} }
-            favorites: []
+            favorites: [],
+            favMeta: {}      // { "süt": {zh, pron, note, addedAt} }  單字本的中文、發音、筆記
         };
     }
 
@@ -183,14 +184,29 @@ var TS = (function () {
 
     /* ---------- 收藏 ---------- */
 
-    function toggleFavorite(word) {
+    function toggleFavorite(word, info) {
         let on = false;
         edit(d => {
             const i = d.favorites.indexOf(word);
-            if (i >= 0) d.favorites.splice(i, 1);
-            else { d.favorites.push(word); on = true; }
+            if (i >= 0) { d.favorites.splice(i, 1); delete d.favMeta[word]; }
+            else {
+                d.favorites.push(word); on = true;
+                d.favMeta[word] = Object.assign({ addedAt: today() }, info || {});
+            }
         });
         return on;
+    }
+
+    function isFavorite(word) {
+        return load().favorites.includes(word);
+    }
+
+    function favInfo(word) {
+        return load().favMeta[word] || {};
+    }
+
+    function setFavInfo(word, info) {
+        edit(d => { d.favMeta[word] = Object.assign({}, d.favMeta[word] || {}, info); });
     }
 
     function favorites() {
@@ -267,6 +283,9 @@ var TS = (function () {
         (incoming.favorites || []).forEach(f => {
             if (!data.favorites.includes(f)) data.favorites.push(f);
         });
+        for (const k in (incoming.favMeta || {})) {
+            if (!data.favMeta[k]) data.favMeta[k] = incoming.favMeta[k];
+        }
 
         save(data);
         return { ok: true, msg: "已合併匯入的紀錄" };
@@ -285,7 +304,7 @@ var TS = (function () {
         markDay, unmarkDay, isDayDone, daysDone,
         recordQuiz, quizStats,
         recordWord, weakWords,
-        toggleFavorite, favorites,
+        toggleFavorite, favorites, isFavorite, favInfo, setFavInfo,
         exportJSON, download, importJSON, reset
     };
 
